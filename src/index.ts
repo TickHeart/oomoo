@@ -3,7 +3,7 @@ import path from 'path'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
 import fs from 'fs-extra'
-import inquirer from 'inquirer'
+// import inquirer from 'inquirer'
 import { resolveConfig } from './config'
 
 export async function oomoo() {
@@ -26,15 +26,15 @@ async function moveImg(pathDir: string, config: {
   watchDir: string
   toDir: string
 }) {
-  const { filename } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'filename',
-      default: path.basename(pathDir),
-      message: '请输入文件名',
-    },
-  ])
-  await copyFileSync(pathDir, config.toDir, filename)
+  // const { filename } = await inquirer.prompt([
+  //   {
+  //     type: 'input',
+  //     name: 'filename',
+  //     default: path.basename(pathDir),
+  //     message: '请输入文件名',
+  //   },
+  // ])
+  await copyFileSync(pathDir, config.toDir, path.basename(pathDir))
 }
 
 async function copyFileSync(filePath: string, destDir: string, filename: string) {
