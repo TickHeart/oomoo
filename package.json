@@ -1,7 +1,7 @@
 {
   "name": "oomoo",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "packageManager": "pnpm@7.1.2",
   "description": "",
   "author": "TickHeart",
