@@ -1,8 +1,16 @@
-# starter-ts
+## 用法
 
-A ts starter by developer-plus.
+在使用pi的情况下，请直接执行 `poo` 指令
 
+并且在您所在的项目根目录创建 `.oomoorc` 配置文件
 
-## LICENSE
+```bash
+# 跳过默认的版本检查
+skipVersionTesting: false
 
-MIT, developer-plus made with 💗.
+# 需要监听的文件
+watchDir=''
+
+# copy文件到指定目录
+toDir=''
+```
