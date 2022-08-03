@@ -1,0 +1,17 @@
+# 跳过默认的版本检查
+skipVersionTesting=false
+
+# 需要监听的文件
+watchDir='/Users/wuhongbin/Desktop/t1'
+
+# copy文件到指定目录
+toDir='/Users/wuhongbin/Desktop/t2'
+
+# 是否覆盖原有的同名文件
+overwriteOriginalFile=true
+
+# 选择是移动图片还是复制图片 copy|move
+model='move'
+
+# 是否将开启监听前文件夹中的图片转移
+collect=false

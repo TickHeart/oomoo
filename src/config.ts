@@ -7,7 +7,12 @@ export const DEFAULT_OPTIONS = {
   skipVersionTesting: false,
   watchDir: '',
   toDir: '',
+  overwriteOriginalFile: false,
+  model: 'copy',
+  collect: false,
 }
+
+export type Options = typeof DEFAULT_OPTIONS
 
 export async function resolveConfig() {
   const pircPath = resolveConfigPath()
@@ -22,7 +27,7 @@ export async function resolveConfig() {
 
 const cwd = process.cwd()
 
-function havePath(path: string) {
+export function havePath(path: string) {
   const isOk = fse.pathExistsSync(path)
   return { isOk, path }
 }

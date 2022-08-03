@@ -86,6 +86,7 @@
     "chokidar": "^3.5.3",
     "dayjs": "^1.11.4",
     "decompress": "^4.2.1",
+    "fast-glob": "^3.2.11",
     "fs-extra": "^10.1.0",
     "ini": "^3.0.0",
     "inquirer": "^9.0.2",
