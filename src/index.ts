@@ -3,7 +3,7 @@ import path from 'path'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
 import fs from 'fs-extra'
-import decompress from 'decompress'
+import extract from 'extract-zip'
 import fg from 'fast-glob'
 import type { Options } from './config'
 import { havePath, resolveConfig } from './config'
@@ -27,8 +27,10 @@ export async function oomoo() {
   log(chalk.green('开启监听成功，开始使用吧'))
   chokidar.watch(config.watchDir, {
   }).on('all', async (event, pathDir) => {
-    if (!config.collect && pathSet.has(pathDir))
+    if (!config.collect && pathSet.has(pathDir)) {
+      pathSet.delete(pathDir)
       return
+    }
 
     if (event === 'add' && isImageFile(pathDir))
       await operationPicture(pathDir, config)
@@ -37,10 +39,10 @@ export async function oomoo() {
   })
 }
 
-oomoo()
-
 async function decompressZip(pathDir: string, config: Options) {
-  await decompress(pathDir, config.watchDir)
+  // await decompress(pathDir, config.watchDir)
+  log(chalk.yellow('zip:') + pathDir)
+  await extract(pathDir, { dir: config.watchDir })
 }
 
 function isZip(pathDir: string) {
@@ -55,6 +57,7 @@ async function operationPicture(pathDir: string, config: Options) {
 async function copyOrMoveFileSync(filePath: string, config: Options, filename: string) {
   const { toDir: destDir, model, overwriteOriginalFile } = config
   const destPath = path.join(destDir, filename)
+  log(chalk.green('file:') + filePath)
   const { isOk } = havePath(destPath)
   if (model === 'move') {
     if (overwriteOriginalFile) {
