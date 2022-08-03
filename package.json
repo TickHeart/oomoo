@@ -1,7 +1,7 @@
 {
   "name": "oomoo",
   "type": "module",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "packageManager": "pnpm@7.1.2",
   "description": "",
   "author": "TickHeart",
@@ -60,6 +60,7 @@
     "@types/inquirer": "^8.2.1",
     "@types/node": "^17.0.45",
     "@types/pacote": "^11.1.5",
+    "@types/unzipper": "^0.10.5",
     "bumpp": "^7.2.0",
     "eslint": "^8.20.0",
     "esno": "^0.16.3",
@@ -86,10 +87,12 @@
     "chokidar": "^3.5.3",
     "dayjs": "^1.11.4",
     "decompress": "^4.2.1",
+    "extract-zip": "^2.0.1",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.1.0",
     "ini": "^3.0.0",
     "inquirer": "^9.0.2",
-    "pacote": "^13.6.1"
+    "pacote": "^13.6.1",
+    "unzipper": "^0.10.11"
   }
 }
