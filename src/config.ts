@@ -32,7 +32,7 @@ export function havePath(path: string) {
   return { isOk, path }
 }
 
-const paths = [havePath(resolve(cwd, '.oomoorc'))]
+const paths = [havePath(resolve(cwd, '.oomoorc')), havePath(resolve(cwd, '.pirc'))]
 
 export function resolveConfigPath() {
   for (const s of paths) {

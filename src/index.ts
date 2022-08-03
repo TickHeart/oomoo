@@ -37,6 +37,8 @@ export async function oomoo() {
   })
 }
 
+oomoo()
+
 async function decompressZip(pathDir: string, config: Options) {
   await decompress(pathDir, config.watchDir)
 }
@@ -84,4 +86,3 @@ export function isImageFile(pathDir: string) {
   return imgFiles.includes(fileExtname)
 }
 
-oomoo()
