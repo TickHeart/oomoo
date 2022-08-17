@@ -1,7 +1,7 @@
 {
   "name": "oomoo",
   "type": "module",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "packageManager": "pnpm@7.1.2",
   "description": "",
   "author": "TickHeart",
@@ -87,7 +87,7 @@
     "chokidar": "^3.5.3",
     "dayjs": "^1.11.4",
     "decompress": "^4.2.1",
-    "extract-zip": "^2.0.1",
+    "execa": "^6.1.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.1.0",
     "ini": "^3.0.0",
