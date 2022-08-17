@@ -2,9 +2,8 @@ import { log } from 'console'
 import path from 'path'
 import chalk from 'chalk'
 import chokidar from 'chokidar'
-import fs from 'fs-extra'
-import extract from 'extract-zip'
 import fg from 'fast-glob'
+import { execaCommand } from 'execa'
 import type { Options } from './config'
 import { havePath, resolveConfig } from './config'
 
@@ -31,6 +30,10 @@ export async function oomoo() {
       pathSet.delete(pathDir)
       return
     }
+    if (/__MACOSX/.test(pathDir)) {
+      await execaCommand(['rm', '-rf', '__MACOSX'].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
+      return
+    }
 
     if (event === 'add' && isImageFile(pathDir))
       await operationPicture(pathDir, config)
@@ -40,9 +43,9 @@ export async function oomoo() {
 }
 
 async function decompressZip(pathDir: string, config: Options) {
-  // await decompress(pathDir, config.watchDir)
   log(chalk.yellow('zip:') + pathDir)
-  await extract(pathDir, { dir: config.watchDir })
+  await execaCommand(['unzip', pathDir].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
+  await execaCommand(['rm -rf', pathDir].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
 }
 
 function isZip(pathDir: string) {
@@ -61,20 +64,18 @@ async function copyOrMoveFileSync(filePath: string, config: Options, filename: s
   const { isOk } = havePath(destPath)
   if (model === 'move') {
     if (overwriteOriginalFile) {
-      if (isOk)
-        await fs.remove(destPath)
-      await fs.move(filePath, path.join(destDir, filename))
+      await execaCommand(['mv', filePath, destPath, '-f'].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
     }
     else {
       if (!isOk)
-        await fs.move(filePath, path.join(destDir, filename))
+        await execaCommand(['mv', filePath, destPath].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
     }
   }
   else if (model === 'copy') {
-    if (overwriteOriginalFile) { await fs.copy(filePath, path.join(destDir, filename)) }
+    if (overwriteOriginalFile) { await execaCommand(['cp -R', filePath, destPath].join(' '), { encoding: 'utf-8', cwd: config.watchDir }) }
     else {
       if (!isOk)
-        await fs.copy(filePath, path.join(destDir, filename))
+        await execaCommand(['cp -R', filePath, destPath].join(' '), { encoding: 'utf-8', cwd: config.watchDir })
     }
   }
 }
